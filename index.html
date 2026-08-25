@@ -739,9 +739,9 @@ input{font-family:inherit;color:inherit}
     <div class="panel-slot">
       <div class="panel" id="panel">
         <div class="p-head" id="pHead">
-          <div class="h-ic" id="hIc"></div>
+          <div class="h-ic" id="hIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg></div>
           <div>
-            <div class="p-title" id="pTitle">Analyse &amp; import footage</div>
+            <div class="p-title" id="pTitle">Import and analyse footage</div>
             <div class="p-sub" id="pSub">Transcribes speakers, topics and moments</div>
           </div>
           <button class="p-collapse" id="collapseBtn" aria-label="Collapse">
@@ -1050,7 +1050,7 @@ const clipsList = $('clipsList'), searchInput = $('searchInput');
 const chatEl = $('chat'), chatInput = $('chatInput');
 
 const PAGE_META = {
-  import:{t:'Analyse & import footage', s:'Transcribes speakers, topics and moments', ic:'folder'},
+  import:{t:'Import and analyse footage', s:'Transcribes speakers, topics and moments', ic:'folder'},
   cut:{t:'Cut', s:'Chat with your assistant and generate edits', ic:'cut'},
   overview:{t:'Project Overview', s:'Your footage at a glance', ic:'grid'}
 };
@@ -1768,16 +1768,7 @@ $('askBtn').addEventListener('click', sendAsk);
 $('tlDd').addEventListener('click', () => $('tlMenu').hidden ? openTlMenu() : closeTlMenu());
 document.addEventListener('click', e => { if(!e.target.closest('#tlSwitch')) closeTlMenu(); });
 $('goEditBtn').addEventListener('click', () => {
-  if(state.cutView === 'questions'){
-    if(state.answers.every(a => a !== null)) startGen();
-    else{
-      addAssistantMsg('Answer the <b>two questions above</b> first — then I\u2019ll build the cut.');
-      chatScroll();
-    }
-  } else {
-    addAssistantMsg('Pick a suggestion or describe the change — I\u2019ll rebuild the cut around it.');
-    chatScroll();
-  }
+  startGen();
 });
 chatInput.addEventListener('keydown', e => {
   if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendAsk(); }
